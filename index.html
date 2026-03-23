@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestell App</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/db.js"></script>
+    <script src="scripts/template.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"> <img src="assets/icons/Logo.png" alt="Bestell App logo"></div>
+            <ul class="nav_links" id="navLinks">
+                <li onclick="toggleMenu()"><a href="#">close</a></li>
+                <li onclick="toggleMenu()"><a href="#">close</a></li>
+                <li onclick="toggleMenu()"><a href="#">close</a></li>
+                <li onclick="toggleMenu()"><a href="#">close</a></li>
+            </ul>
+            <div class="burger_menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="hero_section">
+        </div>
+        <div id="restaurant_header">
+            <img src="assets/icons/burgericon.png" alt="Burger Icon">
+            <h1>Burger House</h1>
+            <p>The best of Burgers, Pizza and Greens all in on place.</p>
+        </div>
+
+        <div class="section_title">
+            <h2><img src="assets/icons/catergoryBurger.png" alt="burger icon"> Burger & Sandwiches</h2>
+        </div>
+        <div class="menu">
+            <div class="menu_item">
+                <img src="assets/img/classicCheeseburger.jpg" alt="classic cheeseburger">
+                <div class="menu_content">
+                    <h3>Name des Burgers<p>Preis</p>
+                    </h3>
+                    <p>Berschreibung</p>
+                    <button class="add_btn">add to basket</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section_title">
+            <h2><img src="assets/icons/catergoryPizza.png" alt="burger icon"> Pizza (30cm)</h2>
+        </div>
+
+        <div class="section_title">
+            <h2><img src="assets/icons/catergorySalad.png" alt="burger icon">Salad</h2>
+        </div>
+    </main>
+    <footer></footer>
+
+</body>
+
+</html>

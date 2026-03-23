@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    position: relative;
+    background: #f36f21;
+}
+
+/* Navbar */
+.navbar {
+    max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 120px;
+    padding-block: 48px;
+    color: white;
+}
+
+.logo img {
+    height: 100px;
+    width: 320px;
+}
+
+.nav_links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #f36f21;
+    flex-direction: column;
+    width: 200px;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav_links li {
+    padding: 10px;
+}
+
+.nav_links li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Aktiv */
+.nav_links.active {
+    display: flex;
+}
+
+/* Burger IMMER sichtbar */
+.burger_menu {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding-right: 48px;
+}
+
+.burger_menu span {
+    height: 3px;
+    width: 25px;
+    background: white;
+    margin: 4px;
+    display: block;
+}
+
+/* HEADER / HERO */
+#hero_section {
+    max-width: 1440px;
+    width: 100%;
+    height: 500px;
+    background: url("./assets/img/hero.jpg") center/cover no-repeat;
+}
+
+.logo-bar {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+/* RESTAURANT INFO */
+#restaurant_header {
+    max-width: 1440px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#restaurant_header img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 12px solid white;
+    position: absolute;
+    top: -100px;
+}
+
+#restaurant_header h1 {
+    margin-top: 120px;
+    font-size: 28px;
+}
+
+#restaurant_header p {
+    font-size: 24px;
+}
+
+/* SECTION TITLE */
+.section_title {
+    background-color: #f36f21;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    margin-top: 25px;
+    padding-left: 120px;
+}
+
+.section_title img {
+    height: 90px;
+    width: 90px;
+}
+
+/* MENU CONTAINER */
+.menu {
+    width: 90%;
+    max-width: 800px;
+    padding-left: 140px;
+}
+
+/* MENU ITEM CARD */
+.menu_item {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* IMAGE */
+.menu_item img {
+    height: 120px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* CONTENT */
+.menu_content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 12px;
+}
+
+.menu_content h3 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.menu_content p {
+    display: inline;
+    font-size: 16px;
+}
+
+/* PRICE + BUTTON */
+
+.price {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.add_btn {
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f9f9f9;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.add-btn:hover {
+    background-color: #eee;
+}
+
+/* FOOTER */
+footer {
+    background: #f36f21;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 12px;
+}
