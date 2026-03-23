@@ -101,3 +101,17 @@ let menuImages = [
   { url: "./assets/img/chickenSalad.jpg", alt: "chicken Salad" },
   { url: "./assets/img/avocadoSalad.jpg", alt: "avocado Salad" },
 ];
+
+let categories = [
+  {
+    key: "burger",
+    title: "Burger & Sandwiches",
+    icon: "./assets/icons/catergoryBurger.png",
+  },
+  {
+    key: "pizza",
+    title: "Pizza (30cm)",
+    icon: "./assets/icons/catergoryPizza.png",
+  },
+  { key: "salad", title: "Salad", icon: "./assets/icons/catergorySalad.png" },
+];

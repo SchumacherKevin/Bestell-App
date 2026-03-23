@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/icons/burgericon.png">
     <title>Bestell App</title>
 
     <link rel="stylesheet" href="style.css">
@@ -12,7 +13,7 @@
     <script src="script.js"></script>
 </head>
 
-<body>
+<body onload="init()">
     <header>
         <nav class="navbar">
             <div class="logo"> <img src="assets/icons/Logo.png" alt="Bestell App logo"></div>
@@ -30,38 +31,34 @@
         </nav>
     </header>
     <main>
-        <div id="hero_section">
-        </div>
+        <section id="hero_section"></section>
+
         <div id="restaurant_header">
-            <img src="assets/icons/burgericon.png" alt="Burger Icon">
+            <img src="assets/icons/burgericon.png" alt="Restaurant Logo">
             <h1>Burger House</h1>
-            <p>The best of Burgers, Pizza and Greens all in on place.</p>
+            <p>The best of Burgers, Pizza and Greens all in one place.</p>
         </div>
 
-        <div class="section_title">
-            <h2><img src="assets/icons/catergoryBurger.png" alt="burger icon"> Burger & Sandwiches</h2>
-        </div>
-        <div class="menu">
-            <div class="menu_item">
-                <img src="assets/img/classicCheeseburger.jpg" alt="classic cheeseburger">
-                <div class="menu_content">
-                    <h3>Name des Burgers<p>Preis</p>
-                    </h3>
-                    <p>Berschreibung</p>
-                    <button class="add_btn">add to basket</button>
+        <div class="menu_basket_wrapper">
+            <div id="menu_box" class="menu"></div>
+            <aside id="basket">
+                <h3>Basket</h3>
+                <div id="basket_items"></div>
+                <div id="basket_totals">
+                    <hr>
+                    <p>Total: $0.00</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="section_title">
-            <h2><img src="assets/icons/catergoryPizza.png" alt="burger icon"> Pizza (30cm)</h2>
-        </div>
-
-        <div class="section_title">
-            <h2><img src="assets/icons/catergorySalad.png" alt="burger icon">Salad</h2>
+                <button id="buy_now_btn">Buy Now</button>
+            </aside>
         </div>
     </main>
-    <footer></footer>
+    <footer>
+        <div id="footer_content">
+            <p>copyright</p>
+            <p>Imprint</p>
+            <p>Cookie Preferences</p>
+        </div>
+    </footer>
 
 </body>
 
