@@ -27,14 +27,21 @@
         <div class="menu_basket_wrapper">
             <div id="menu_box" class="menu"></div>
             <aside id="basket">
-                <h3>Basket</h3>
+                <h3 class="basket_title">Basket</h3>
                 <div id="basket_items"></div>
                 <div id="basket_totals">
-                    <hr>
-                    <p>Total: 0.00 €</p>
+
                 </div>
             </aside>
         </div>
+        <dialog id="buy_dialog" style="display:none;">
+            <div class="dialog_content">
+                <img src="assets/icons/confrimTruck.png" alt="little truck">
+                <button id="close_dialog" onclick="closeDialog()">✖</button>
+                <p>Order confirmed!</p>
+                <p>Your food is on the way!</p>
+            </div>
+        </dialog>
     </main>
     <footer>
         <div id="footer_content">

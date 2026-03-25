@@ -1,12 +1,12 @@
-function toggleMenu() {
-  document.getElementById("navLinks").classList.toggle("active");
-}
+// function toggleMenu() {
+//   document.getElementById("navLinks").classList.toggle("active");
+// }
 
 function init() {
   renderHeader();
   renderRestaurantHeader();
   renderMenu();
-  renderCart()
+  renderCart();
   renderFooter();
 }
 
@@ -41,22 +41,41 @@ function renderRestaurantHeader() {
 }
 
 function renderCart() {
+  // Holt das HTML-Element, in dem die Warenkorb-Items angezeigt werden
   let basket = document.getElementById("basket_items");
+
+  // Variable für die Zwischensumme (Summe aller Produkte)
   let subtotal = 0;
+
+  // Feste Lieferkosten
   let delivery = 4.99;
 
+  // Leert den aktuellen Inhalt des Warenkorbs im HTML,
+  // damit er neu aufgebaut werden kann
   basket.innerHTML = "";
 
+  // Geht jedes Item im Warenkorb durch
   cart.forEach((item) => {
+    // Berechnet die Zwischensumme:
+    // Preis * Menge wird aufaddiert
     subtotal += item.price * item.amount;
 
+    // Fügt für jedes Item den entsprechenden HTML-Code ein
+    // (kommt vermutlich aus einer separaten Funktion)
     basket.innerHTML += getHtmlforBasket(item);
   });
 
+  // Berechnet den Gesamtpreis (Zwischensumme + Lieferkosten)
   let total = subtotal + delivery;
 
-  document.getElementById("basket_totals").innerHTML =
-    getHtmlforBasketTotal(total,subtotal,delivery);
+  // Aktualisiert den Bereich für die Gesamtkosten im HTML
+  // und übergibt die berechneten Werte an eine Funktion,
+  // die den passenden HTML-Code erzeugt
+  document.getElementById("basket_totals").innerHTML = getHtmlforBasketTotal(
+    total,
+    subtotal,
+    delivery,
+  );
 }
 
 function renderFooter() {
@@ -80,22 +99,33 @@ function addToCart(itemName) {
   } else {
     // Wenn noch nicht im Warenkorb →
     // neues Objekt hinzufügen (Kopie vom Menü-Item!)
-    // Die drei Punkte nennt man den Spread Operator nimmt alles aus diesem Objekt und kopiert es
+    // Die drei Punkte nennt man den Spread Operator, der alles aus diesem Objekt kopiert
     cart.push({ ...item, amount: 1 });
+    // Danach das neue Element im Warenkorb finden und in cartItem speichern
+    cartItem = cart.find((c) => c.name === itemName);
   }
+
+  // Button für das hinzugefügte Produkt aktualisieren (ohne komplettes neu rendern)
+  updateButton(itemName, cartItem.amount);
 
   // Nach jeder Änderung → Warenkorb neu anzeigen
   renderCart();
 }
 
-function increaseItem(itemName) {
-  let item = cart.find((i) => i.name === itemName);
+function updateButton(itemName, amount) {
+  let btn = document.getElementById(`btn-${itemName}`);
+  if (!btn) return;
 
-  if (item) {
-    item.amount++; // +1
-  }
+  btn.innerText = `Added (${amount})`;
+  btn.classList.add("added");
+}
 
-  renderCart();
+function resetButton(itemName) {
+  let btn = document.getElementById(`btn-${itemName}`);
+  if (!btn) return;
+
+  btn.innerText = "Add to basket";
+  btn.classList.remove("added");
 }
 
 function decreaseItem(itemName) {
@@ -115,8 +145,35 @@ function decreaseItem(itemName) {
 }
 
 function removeItem(itemName) {
-  // Filtert das Item aus dem Warenkorb raus
+  // Die Funktion entfernt ein Item mit einem bestimmten Namen aus dem Warenkorb,
+  // indem sie alle anderen Elemente beibehält, und aktualisiert danach die Anzeige.
   cart = cart.filter((i) => i.name !== itemName);
 
+  resetButton(itemName);
   renderCart();
+}
+
+
+function showDialog() {
+  let dialogTimeout; // Variable speichert das Timeout, um es später abbrechen zu können
+  const dialog = document.getElementById("buy_dialog"); // Das Dialog-Element holen
+  dialog.style.display = "flex"; // Dialog sichtbar machen
+  dialog.style.animation = "fadeIn 0.3s forwards"; // Fade-In Animation anwenden
+
+  // Automatisch nach 3 Sekunden schließen
+  dialogTimeout = setTimeout(closeDialog, 3000);
+}
+
+
+function closeDialog() {
+  let dialogTimeout; // Variable speichert das Timeout, um es später abbrechen zu können
+  const dialog = document.getElementById("buy_dialog"); // Dialog-Element holen
+  dialog.style.animation = "fadeOut 0.3s forwards"; // Fade-Out Animation anwenden
+
+  // Nach der Animation den Dialog unsichtbar machen
+  setTimeout(() => {
+    dialog.style.display = "none";
+  }, 300); // 300ms entspricht der Dauer der Fade-Out Animation
+
+  clearTimeout(dialogTimeout); // Sicherstellen, dass das automatische Schließen gestoppt wird
 }

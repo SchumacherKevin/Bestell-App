@@ -12,11 +12,13 @@ function getHtmlforMenuItem(item, image) {
                 <div class="menu_item ${item.category}">
                     <img src="${image.url}" alt="${image.alt}">
                     <div class="menu_content">
-                        <h3>${item.name}</h3>
-                        <p class="price">€ ${item.price.toFixed(2)}</p>
+                        <div class="menu_headerprice">
+                            <h3>${item.name}</h3>
+                            <span class="price">€ ${item.price.toFixed(2)}</span>
+                        </div>
                         <p>${item.description}</p>
-                        <button type="button" class="add_btn" onclick="addToCart('${item.name}')">Add to basket</button>
-                    </div>
+                        <button id="btn-${item.name}" class="add_btn" 
+                        onclick="addToCart('${item.name}')">Add to basket</button>
                 </div>
             `;
 }
@@ -25,13 +27,7 @@ function getHtmlforHeader() {
   return `
             <nav class="navbar">
             <div class="logo"> <img src="assets/icons/Logo.png" alt="Bestell App logo"></div>
-            <ul class="nav_links" id="navLinks">
-                <li onclick="toggleMenu()"><a href="#">close</a></li>
-                <li onclick="toggleMenu()"><a href="#">close</a></li>
-                <li onclick="toggleMenu()"><a href="#">close</a></li>
-                <li onclick="toggleMenu()"><a href="#">close</a></li>
-            </ul>
-            <div class="burger_menu" onclick="toggleMenu()">
+            <div class="burger_menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -79,7 +75,7 @@ function getHtmlforBasket(item) {
     `;
 }
 
-function getHtmlforBasketTotal(total,subtotal,delivery) {
+function getHtmlforBasketTotal(total, subtotal, delivery) {
   return `
     <div class="totals">
         <div class="row">
@@ -97,7 +93,7 @@ function getHtmlforBasketTotal(total,subtotal,delivery) {
         </div>
     </div>
 
-    <button id="buy_now_btn">
+    <button id="buy_now_btn" onclick="showDialog()">
         Buy now (${total.toFixed(2)} €)
     </button>
   `;
