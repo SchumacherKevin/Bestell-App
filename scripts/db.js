@@ -88,7 +88,7 @@ let menu = [
   },
 ];
 
-let cart = [];
+let basket = [];
 
 let menuImages = [
   { url: "./assets/img/classicCheeseburger.jpg", alt: "classic cheeseburger" },

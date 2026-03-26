@@ -1,28 +1,3 @@
-function getHtmlforSection(category) {
-  return `
-        <div class="section_title">
-            <h2><img src="${category.icon}" alt="${category.key} icon"> ${category.title}</h2>
-        </div>
-        <div class="menu" id="menu_${category.key}"></div>
-    `;
-}
-
-function getHtmlforMenuItem(item, image) {
-  return `
-                <div class="menu_item ${item.category}">
-                    <img src="${image.url}" alt="${image.alt}">
-                    <div class="menu_content">
-                        <div class="menu_headerprice">
-                            <h3>${item.name}</h3>
-                            <span class="price">€ ${item.price.toFixed(2)}</span>
-                        </div>
-                        <p>${item.description}</p>
-                        <button id="btn-${item.name}" class="add_btn" 
-                        onclick="addToCart('${item.name}')">Add to basket</button>
-                </div>
-            `;
-}
-
 function getHtmlforHeader() {
   return `
             <nav class="navbar">
@@ -36,6 +11,43 @@ function getHtmlforHeader() {
     `;
 }
 
+function getHtmlforRestaurantHeader() {
+  return `
+            <img id="rund_burger" src="assets/icons/burgericon.png" alt="Restaurant Logo">
+            <img id="name_restaurant_img" src="assets/icons/name restaurant.PNG" alt="Burger house">
+            <img id="rating_img" src="assets/icons/rating.png" alt="rating">
+            <p>The best of Burgers, Pizza and Greens all in one place.</p>
+    `;
+}
+
+function getHtmlforSection(category) {
+  return `
+        <div class="section_title">
+            <img src="${category.icon}" alt="${category.key} icon">
+            <h2> ${category.title}</h2>
+        </div>
+        <div class="menu" id="menu_${category.key}"></div>
+    `;
+}
+
+function getHtmlforMenuItem(item, image) {
+  return `
+                <div class="menu_item ${item.category}">
+                <div class="border_radius">
+                    <img src="${image.url}" alt="${image.alt}">
+                </div>
+                    <div class="menu_content">
+                        <div class="menu_headerprice">
+                            <h3>${item.name}</h3>
+                            <span class="price">€ ${item.price.toFixed(2)}</span>
+                        </div>
+                        <p>${item.description}</p>
+                        <button id="btn-${item.name}" class="add_btn" 
+                        onclick="addToBasket('${item.name}')">Add to basket</button>
+                </div>
+            `;
+}
+
 function getHtmlforFooter() {
   return `
             <p>© copyright</p>
@@ -44,33 +56,35 @@ function getHtmlforFooter() {
     `;
 }
 
-function getHtmlforRestaurantHeader() {
-  return `
-            <img src="assets/icons/burgericon.png" alt="Restaurant Logo">
-            <h1>Burger House</h1>
-            <p>The best of Burgers, Pizza and Greens all in one place.</p>
-    `;
-}
-
 function getHtmlforBasket(item) {
+  // Icon für den "−" Button: Menge 1 → Mülleimer, sonst Minus
+  let decreaseIcon =
+    item.amount === 1
+      ? '<i class="fa fa-trash"></i>'
+      : '<i class="fa fa-minus"></i>';
+  let removeButtonHtml =
+    item.amount > 1
+      ? `<button class="remove_btn" onclick="removeItem('${item.name}')">
+         <i class="fa fa-trash"></i>
+       </button>`
+      : ""; // leer lassen, wenn Menge 1
   return `
+  
     <div class="basket_card">
-        
         <div class="basket_top">
             <span>${item.amount} x ${item.name}</span>
-            <span>${(item.price * item.amount).toFixed(2)} €</span>
+            ${removeButtonHtml} 
+            </button>
         </div>
 
         <div class="basket_bottom">
             <div class="controls">
-                <button onclick="decreaseItem('${item.name}')">-</button>
+                <button onclick="decreaseItem('${item.name}')">${decreaseIcon}</i></button>
                 <span>${item.amount}</span>
-                <button onclick="increaseItem('${item.name}')">+</button>
+                <button onclick="increaseItem('${item.name}')"><i class="fa fa-plus"></i></button>
             </div>
-
-                <button class="remove_btn" onclick="removeItem('${item.name}')">🗑</button>
+                <span>${(item.price * item.amount).toFixed(2)} €</span>
         </div>
-
     </div>
     `;
 }

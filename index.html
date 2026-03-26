@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" href="assets/icons/burgericon.png">
-    <title>Bestell App</title>
+    <title>Burger House</title>
 
     <link rel="stylesheet" href="style.css">
     <script src="scripts/db.js"></script>
@@ -34,7 +37,7 @@
                 </div>
             </aside>
         </div>
-        <dialog id="buy_dialog" style="display:none;">
+        <dialog id="buy_dialog">
             <div class="dialog_content">
                 <img src="assets/icons/confrimTruck.png" alt="little truck">
                 <button id="close_dialog" onclick="closeDialog()">✖</button>
@@ -45,6 +48,12 @@
     </main>
     <footer>
         <div id="footer_content">
+        </div>
+        <div id="footer_navbar">
+            <a href="#hero_section"><i class="fa fa-home"></i></a>
+            <a href="#"><i class="fa fa-info-circle"></i></a>
+            <a href="#menu_box"><i class="fa fa-utensils"></i></a>
+            <a href="#basket"><i class="fa fa-shopping-basket" onclick="toggleBasket()"></i></a>
         </div>
     </footer>
 
