@@ -57,7 +57,6 @@ function getHtmlforFooter() {
 }
 
 function getHtmlforBasket(item) {
-  // Icon für den "−" Button: Menge 1 → Mülleimer, sonst Minus
   let decreaseIcon =
     item.amount === 1
       ? '<i class="fa fa-trash"></i>'
@@ -67,7 +66,7 @@ function getHtmlforBasket(item) {
       ? `<button class="remove_btn" onclick="removeItem('${item.name}')">
          <i class="fa fa-trash"></i>
        </button>`
-      : ""; // leer lassen, wenn Menge 1
+      : "";
   return `
   
     <div class="basket_card">

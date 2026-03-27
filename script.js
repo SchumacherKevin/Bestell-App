@@ -1,23 +1,14 @@
-// --------------------------
-// INIT / STARTUP
-// --------------------------
-
-// Diese Funktion initialisiert die Seite, wird vermutlich beim Laden aufgerufen
 function init() {
-  renderHeader(); // Kopfbereich der Seite rendern
-  renderRestaurantHeader(); // Header für das Restaurant rendern
-  renderMenu(); // Menü anzeigen
-  renderBasket(); // Warenkorb anzeigen
-  renderFooter(); // Fußbereich rendern
+  renderHeader();
+  renderRestaurantHeader();
+  renderMenu();
+  renderBasket();
+  renderFooter();
 }
-
-// --------------------------
-// HEADER / FOOTER RENDERING
-// --------------------------
 
 function renderHeader() {
   let headerRef = document.getElementById("header_main");
-  headerRef.innerHTML = getHtmlforHeader(); // Dynamische HTML-Vorlage einfügen
+  headerRef.innerHTML = getHtmlforHeader();
 }
 
 function renderRestaurantHeader() {
@@ -30,15 +21,11 @@ function renderFooter() {
   footerRef.innerHTML = getHtmlforFooter();
 }
 
-// --------------------------
-// MENU RENDERING
-// --------------------------
-
 function renderMenu() {
   let menuContainer = document.getElementById("menu_box");
 
   for (let category of categories) {
-    menuContainer.innerHTML += getHtmlforSection(category); // Kategorie-Block
+    menuContainer.innerHTML += getHtmlforSection(category);
 
     let categoryContainer = document.getElementById(`menu_${category.key}`);
 
@@ -46,7 +33,6 @@ function renderMenu() {
       let item = menu[i];
       let image = menuImages[i];
 
-      // Nur Items der aktuellen Kategorie hinzufügen
       if (item.category === category.key) {
         categoryContainer.innerHTML += getHtmlforMenuItem(item, image);
       }
@@ -54,21 +40,17 @@ function renderMenu() {
   }
 }
 
-// --------------------------
-// WARENKORB LOGIK
-// --------------------------
-
 function renderBasket() {
   let basketItemsRef = document.getElementById("basket_items");
 
   let subtotal = 0;
   let delivery = 4.99;
 
-  basketItemsRef.innerHTML = ""; // Vorherigen Inhalt löschen
+  basketItemsRef.innerHTML = "";
 
   basket.forEach((item) => {
     subtotal += item.price * item.amount;
-    basketItemsRef.innerHTML += getHtmlforBasket(item); // HTML pro Item einfügen
+    basketItemsRef.innerHTML += getHtmlforBasket(item);
   });
 
   let total = subtotal + delivery;
@@ -82,20 +64,13 @@ function renderBasket() {
   updateBuyButton(); // Button aktivieren/deaktivieren abhängig vom Inhalt
 }
 
-// Prüft, ob im Warenkorb Items vorhanden sind und aktiviert / deaktiviert den Kauf-Button
 function updateBuyButton() {
   let basketItems = document.getElementById("basket_items");
   let buyBtn = document.getElementById("buy_now_btn");
 
-  // Button wird deaktiviert, wenn Warenkorb leer
   buyBtn.disabled = basketItems.children.length === 0;
 }
 
-// --------------------------
-// WARENKORB ACTIONS
-// --------------------------
-
-// Item zum Warenkorb hinzufügen
 function addToBasket(itemName) {
   let item = menu.find((m) => m.name === itemName);
   if (!item) return;
@@ -103,27 +78,24 @@ function addToBasket(itemName) {
   let basketItem = basket.find((b) => b.name === itemName);
 
   if (basketItem) {
-    basketItem.amount++; // Menge erhöhen
+    basketItem.amount++;
   } else {
-    basket.push({ ...item, amount: 1 }); // Neues Item hinzufügen
-    basketItem = basket.find((b) => b.name === itemName); // nochmal holen
+    basket.push({ ...item, amount: 1 }); 
+    basketItem = basket.find((b) => b.name === itemName);
   }
 
   updateButton(itemName, basketItem.amount); // Buttontext anpassen
   renderBasket(); // Warenkorb aktualisieren
 }
 
-// Aktualisiert den Button im Menü (Text + Klasse)
 function updateButton(itemName, amount) {
   let btn = document.getElementById(`btn-${itemName}`);
   if (!btn) return;
 
-  // Aktueller Status im Button anzeigen
   btn.innerText = `Added (${amount})`;
   btn.classList.add("added");
 }
 
-// Button zurücksetzen (wenn Item aus Basket entfernt wird)
 function resetButton(itemName) {
   let btn = document.getElementById(`btn-${itemName}`);
   if (!btn) return;
@@ -132,7 +104,6 @@ function resetButton(itemName) {
   btn.classList.remove("added");
 }
 
-// Menge im Basket verringern
 function decreaseItem(itemName) {
   const item = basket.find((i) => i.name === itemName);
   if (!item) return;
@@ -145,28 +116,22 @@ function decreaseItem(itemName) {
   }
 }
 
-// Menge erhöhen
 function increaseItem(itemName) {
   const item = basket.find((i) => i.name === itemName);
 
   if (item) {
     item.amount += 1;
-    updateButton(itemName, item.amount); // Hinweis: hier wird aktuell nur Text geändert
+    updateButton(itemName, item.amount);
   }
   renderBasket();
 }
 
-// Item komplett aus Basket entfernen
 function removeItem(itemName) {
   basket = basket.filter((i) => i.name !== itemName);
 
   resetButton(itemName);
   renderBasket();
 }
-
-// --------------------------
-// DIALOG / BESTELLUNG
-// --------------------------
 
 function showDialog() {
   let dialogTimeout;
@@ -194,33 +159,25 @@ function closeDialog() {
   }, 300);
 }
 
-// --------------------------
-// AMOUNT BUTTONS MIT ICONS
-// --------------------------
-
-// Funktion um die Buttons für Menge zu aktualisieren
-// Wenn Menge 1 → Mülleimer, sonst Minus
 function updateAmountButton(itemName, amount) {
   let button = document.getElementById(`btn_${itemName}`);
 
   if (!button) return;
 
   if (amount === 1) {
-    button.innerHTML = '<i class="fa fa-trash"></i>'; // Menge 1 → löschen
+    button.innerHTML = '<i class="fa fa-trash"></i>';
   } else {
-    button.innerHTML = '<i class="fa fa-minus"></i>'; // Mehrere → Minus
+    button.innerHTML = '<i class="fa fa-minus"></i>';
   }
 
-  // Menge neben Icon anzeigen
-  button.innerHTML += ` ${amount}`;
 }
 
 function toggleBasket() {
   let basket = document.getElementById("basket");
 
   if (basket.style.display === "none" || basket.style.display === "") {
-    basket.style.display = "block"; // Basket anzeigen
+    basket.style.display = "block";
   } else {
-    basket.style.display = "none"; // Basket ausblenden
+    basket.style.display = "none";
   }
 }
