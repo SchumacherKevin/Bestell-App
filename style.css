@@ -123,8 +123,8 @@ header {
 }
 
 #basket_items {
-    height: 332px;
-    overflow-y: scroll;
+    max-height: 332px;
+    overflow-y: auto;
 }
 
 .basket_container {
@@ -219,6 +219,11 @@ header {
     gap: 32px;
 }
 
+#empty_basket img {
+    height: 128px;
+    width: 128px;
+}
+
 .section_title {
     background-color: #f36f21;
     color: white;
@@ -233,11 +238,6 @@ header {
 .section_title img {
     height: 90px;
     width: 90px;
-}
-
-.menu {
-    width: 90%;
-    max-width: 800px;
 }
 
 .menu_item {

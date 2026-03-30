@@ -4,8 +4,8 @@ function init() {
   renderMenu();
   emptyBasket();
   renderFooter();
+  handleBasketVisibility();
 }
-
 
 function renderHeader() {
   let headerRef = document.getElementById("header_main");
@@ -175,12 +175,16 @@ function updateAmountButton(itemName, amount) {
 }
 
 function toggleBasket() {
-  let basket = document.getElementById("basket");
+  const basket = document.getElementById("basket");
 
-  if (basket.style.display === "none" || basket.style.display === "") {
-    basket.style.display = "block";
-  } else {
-    basket.style.display = "none";
+  if (window.innerWidth <= 768) {
+    if (basket.hasAttribute("open")) {
+      basket.removeAttribute("open");
+      basket.style.display = "none";
+    } else {
+      basket.setAttribute("open", "");
+      basket.style.display = "block";
+    }
   }
 }
 
@@ -193,6 +197,22 @@ function emptyBasket() {
     totalsRef.style.display = "none";
   } else {
     totalsRef.style.display = "";
-    buttonRef.style.display = "";
+    totalsRef.style.display = "";
   }
 }
+
+function handleBasketVisibility() {
+  const basket = document.getElementById("basket");
+
+  if (window.innerWidth > 768) {
+    // Immer sichtbar (Desktop)
+    basket.style.display = "block";
+    basket.setAttribute("open", "");
+  } else {
+    // Mobile -> schließen
+    basket.style.display = "none";
+    basket.removeAttribute("open");
+  }
+}
+
+window.addEventListener("resize", handleBasketVisibility);
