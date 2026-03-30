@@ -39,7 +39,7 @@ function getHtmlforMenuItem(item, image) {
                     <div class="menu_content">
                         <div class="menu_headerprice">
                             <h3>${item.name}</h3>
-                            <span class="price">€ ${item.price.toFixed(2)}</span>
+                            <span class="price">${item.price.toFixed(2)} €</span>
                         </div>
                         <p>${item.description}</p>
                         <button id="btn-${item.name}" class="add_btn" 
