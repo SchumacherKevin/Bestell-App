@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="scripts/db.js"></script>
     <script src="scripts/template.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body onload="init()">
@@ -24,18 +24,17 @@
         <section id="hero_section"></section>
 
         <div id="restaurant_header">
-
         </div>
 
         <div class="menu_basket_wrapper">
             <div id="menu_box" class="menu"></div>
-            <aside id="basket">
+            <dialog id="basket" open>
                 <h3 class="basket_title">Basket</h3>
                 <div id="basket_items"></div>
                 <div id="basket_totals">
 
                 </div>
-            </aside>
+            </dialog>
         </div>
         <dialog id="buy_dialog">
             <div class="dialog_content">
@@ -56,7 +55,6 @@
             <a href="#basket"><i class="fa fa-shopping-basket" onclick="toggleBasket()"></i></a>
         </div>
     </footer>
-
 </body>
 
 </html>

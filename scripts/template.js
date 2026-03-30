@@ -90,7 +90,7 @@ function getHtmlforBasket(item) {
 
 function getHtmlforBasketTotal(total, subtotal, delivery) {
   return `
-    <div class="totals">
+    <div id="totals_section" class="totals">
         <div class="row">
             <span>Subtotal</span>
             <span>${subtotal.toFixed(2)} €</span>
@@ -110,4 +110,13 @@ function getHtmlforBasketTotal(total, subtotal, delivery) {
         Buy now (${total.toFixed(2)} €)
     </button>
   `;
+}
+
+function getHtmlforEmptyBasket() {
+  return `
+    <div id="empty_basket">
+        <p>Nothing here yet.<br>Go ahead and choose something delicious!</p>
+        <img src="assets/icons/basket.png" alt="shoping card">
+    </div>
+`;
 }

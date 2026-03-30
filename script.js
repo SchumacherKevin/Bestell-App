@@ -2,9 +2,10 @@ function init() {
   renderHeader();
   renderRestaurantHeader();
   renderMenu();
-  renderBasket();
+  emptyBasket();
   renderFooter();
 }
+
 
 function renderHeader() {
   let headerRef = document.getElementById("header_main");
@@ -40,7 +41,7 @@ function renderMenu() {
   }
 }
 
-function renderBasket() {
+function renderBasketTotal() {
   let basketItemsRef = document.getElementById("basket_items");
 
   let subtotal = 0;
@@ -60,8 +61,8 @@ function renderBasket() {
     subtotal,
     delivery,
   );
-
-  updateBuyButton(); // Button aktivieren/deaktivieren abhängig vom Inhalt
+  updateBuyButton();
+  emptyBasket();
 }
 
 function updateBuyButton() {
@@ -72,20 +73,20 @@ function updateBuyButton() {
 }
 
 function addToBasket(itemName) {
-  let item = menu.find((m) => m.name === itemName);
-  if (!item) return;
+  let menuItem = menu.find((menuEntry) => menuEntry.name === itemName);
+  if (!menuItem) return;
 
-  let basketItem = basket.find((b) => b.name === itemName);
+  let basketEntry = basket.find((basketItem) => basketItem.name === itemName);
 
-  if (basketItem) {
-    basketItem.amount++;
+  if (basketEntry) {
+    basketEntry.amount++;
   } else {
-    basket.push({ ...item, amount: 1 }); 
-    basketItem = basket.find((b) => b.name === itemName);
+    basket.push({ ...menuItem, amount: 1 });
+    basketEntry = basket.find((basketItem) => basketItem.name === itemName);
   }
 
-  updateButton(itemName, basketItem.amount); // Buttontext anpassen
-  renderBasket(); // Warenkorb aktualisieren
+  updateButton(itemName, basketEntry.amount);
+  renderBasketTotal();
 }
 
 function updateButton(itemName, amount) {
@@ -105,32 +106,35 @@ function resetButton(itemName) {
 }
 
 function decreaseItem(itemName) {
-  const item = basket.find((i) => i.name === itemName);
-  if (!item) return;
-  item.amount--;
-  if (item.amount <= 0) {
+  const basketEntry = basket.find((basketItem) => basketItem.name === itemName);
+  if (!basketEntry) return;
+
+  basketEntry.amount--;
+
+  if (basketEntry.amount <= 0) {
     removeItem(itemName);
   } else {
-    updateButton(itemName, item.amount);
-    renderBasket();
+    updateButton(itemName, basketEntry.amount);
+    renderBasketTotal();
   }
 }
 
 function increaseItem(itemName) {
-  const item = basket.find((i) => i.name === itemName);
+  const basketEntry = basket.find((basketItem) => basketItem.name === itemName);
 
-  if (item) {
-    item.amount += 1;
-    updateButton(itemName, item.amount);
+  if (basketEntry) {
+    basketEntry.amount += 1;
+    updateButton(itemName, basketEntry.amount);
   }
-  renderBasket();
+
+  renderBasketTotal();
 }
 
 function removeItem(itemName) {
-  basket = basket.filter((i) => i.name !== itemName);
+  basket = basket.filter((basketItem) => basketItem.name !== itemName);
 
   resetButton(itemName);
-  renderBasket();
+  renderBasketTotal();
 }
 
 function showDialog() {
@@ -144,8 +148,7 @@ function showDialog() {
   basket = [];
 
   menu.forEach((item) => resetButton(item.name));
-
-  renderBasket();
+  renderBasketTotal();
 }
 
 function closeDialog() {
@@ -169,7 +172,6 @@ function updateAmountButton(itemName, amount) {
   } else {
     button.innerHTML = '<i class="fa fa-minus"></i>';
   }
-
 }
 
 function toggleBasket() {
@@ -179,5 +181,18 @@ function toggleBasket() {
     basket.style.display = "block";
   } else {
     basket.style.display = "none";
+  }
+}
+
+function emptyBasket() {
+  const basketRef = document.getElementById("basket_items");
+  const totalsRef = document.getElementById("basket_totals");
+
+  if (basket.length === 0) {
+    basketRef.innerHTML = getHtmlforEmptyBasket();
+    totalsRef.style.display = "none";
+  } else {
+    totalsRef.style.display = "";
+    buttonRef.style.display = "";
   }
 }
